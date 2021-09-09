@@ -1,7 +1,9 @@
 package edu.eci.cvds.ecibook.service;
 
 import java.math.BigDecimal;
+import java.util.Locale.Category;
 
+import edu.eci.cvds.ecibook.model.BookSaleException;
 import edu.eci.cvds.ecibook.model.DiscountCategory;
 
 /**
@@ -16,11 +18,47 @@ public class BookSaleService {
 	 * @param discountCategory  The discount category
 	 * @return The amount to be charged to the client
 	 */
-	public BigDecimal calculateCost(final BigDecimal bookCategory, final DiscountCategory discountCategory) {
+	public BigDecimal calculateCost(final Integer bookCategory, final DiscountCategory discountCategory) throws BookSaleException {
 
-		return BigDecimal.TEN;
-	}
+		BigDecimal porcentaje, total;
 
+		if (bookCategory < 0 || bookCategory > 30) {
+			throw new BookSaleException(BookSaleException.INVALID);			
+		}
+
+		else if(discountCategory != DiscountCategory.EMPLOYEE && discountCategory != DiscountCategory.STUDENT &&  discountCategory != DiscountCategory.OTHER ) {
+			throw new BookSaleException(BookSaleException.INVALID_CAT);
+		}
+
+		BigDecimal descuento = null;
+		switch(discountCategory) {
+			case EMPLOYEE:
+				descuento = new BigDecimal(0.10);
+				break;
+			case STUDENT:
+				descuento = new BigDecimal(0.20);
+				break;
+			case OTHER:
+				descuento = new BigDecimal(0);
+				break;
+			}
+
+
+		BigDecimal valor = null;
+		if( bookCategory >= 1 && bookCategory <= 10 ) {
+			valor = new BigDecimal(25000);
+		}
+		else if( bookCategory >= 11 && bookCategory <= 20 ) {
+			valor = new BigDecimal(50000);
+		}
+		else if ( bookCategory >= 21 && bookCategory <= 30 ) {
+			valor = new BigDecimal(100000);
+		}
+		
+		porcentaje = descuento.multiply(valor);
+		total = valor.subtract(porcentaje);
+		return total;
+		}
 	/*
 	 * Tip: Siempre que se desee realizar cálculos matemáticos de alta precisión (por ejemplo para temas de dinero)
 	 * es mucho más confiable usar el tipo de dato BigDecimal, pues soporta un alto rango de número, decimales y
@@ -34,5 +72,4 @@ public class BookSaleService {
 	 * <li>División: <code>BigDecimal division = bd1.divide(bd2);</code></li>
 	 * </ul>
 	 */
-
 }
