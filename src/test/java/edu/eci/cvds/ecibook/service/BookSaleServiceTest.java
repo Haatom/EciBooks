@@ -2,11 +2,7 @@ package edu.eci.cvds.ecibook.service;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.beans.Transient;
 import java.math.BigDecimal;
-import org.junit.Assert;
-import org.junit.Test;
 import edu.eci.cvds.ecibook.model.DiscountCategory;
 import edu.eci.cvds.ecibook.model.BookSaleException;
 
