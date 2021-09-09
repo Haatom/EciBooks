@@ -60,7 +60,7 @@ public class BookSaleService {
 		return total;
 		}
 	/*
-	 * Tip: Siempre que se desee realizar cálculos matemáticos de alta precisión (por ejemplo para temas de dinero)
+	 * Tip: Siempre qe se desee realizar cálculos matemáticos de alta precisión (por ejemplo para temas de dinero)
 	 * es mucho más confiable usar el tipo de dato BigDecimal, pues soporta un alto rango de número, decimales y
 	 * tiene mayor precisión en los cálculos. <br />
 	 * Ejemplos básicos de operaciones con BigDecimal, teniendo las variables `bd1` y `bd2`:
